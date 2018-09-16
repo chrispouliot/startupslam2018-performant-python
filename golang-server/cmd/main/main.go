@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -8,9 +9,12 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	sleep, err := strconv.Atoi(r.URL.Path[1:])
+	path := r.URL.Path[1:]
+	log.Println(fmt.Sprintf("Got path of '%s'", path))
+	sleep, err := strconv.Atoi(path)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(fmt.Sprintf("Invalid delay: %s", path)))
 		return
 	}
 	time.Sleep(time.Millisecond * time.Duration(sleep))
