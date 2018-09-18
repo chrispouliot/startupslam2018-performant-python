@@ -1,4 +1,6 @@
 from random import randint
+import time
+
 import requests
 
 url = "http://209.97.148.110"
@@ -16,4 +18,6 @@ def main():
 
 
 if __name__ == '__main__':
+    start = time.time()
     main()
+    print(f"Elapsed: {int(time.time() - start)}s")
