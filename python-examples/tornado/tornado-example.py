@@ -1,5 +1,8 @@
+def gen(f):
+    return f
+
+
 from random import randint
-import string
 
 from tornado import ioloop
 from tornado.httpclient import AsyncHTTPClient
@@ -19,7 +22,7 @@ def main(base_url):
     http_client = AsyncHTTPClient()
     urls = build_urls(url, 100)
     responses = yield [http_client.fetch(u) for u in urls]
-    raise gen.Return(value="done!")  # We cant return from a generator, we have to raise an exception!
+    raise gen.Return(value=responses)  # We cant return from a generator, we have to raise an exception!
 
 
 if __name__ == "__main__":

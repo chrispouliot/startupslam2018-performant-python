@@ -22,6 +22,7 @@ def chunked_http_client():
             data = yield from r.content.read()
             yield from r.wait_for_close()
         return data
+
     return http_get
 
 
@@ -40,3 +41,5 @@ if __name__ == "__main__":
     start = time.time()
     loop.run_until_complete(main(url))
     print("Elapsed: {}s".format(time.time() - start))
+
+
