@@ -1,5 +1,5 @@
-from socket import AF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR, socket
 from concurrent.futures import ProcessPoolExecutor as Pool
+from utils import get_socket
 
 pool = Pool(4)
 
@@ -12,10 +12,7 @@ def fib(n):
 
 
 def work_server(address):
-    sock = socket(AF_INET, SOCK_STREAM)
-    sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-    sock.bind(address)
-    sock.listen(5)
+    sock = get_socket(address)
     while True:
         client, addr = sock.accept()
         print("connection", addr)
